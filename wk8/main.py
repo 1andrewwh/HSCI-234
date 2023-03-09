@@ -34,6 +34,7 @@ class Player:
         p5.text('Meteor', 15, -10)
         p5.pop()
 
+
     def You(self):
         p5.stroke(255)
         p5.fill(self.x,206,250)
@@ -44,11 +45,17 @@ class Player:
         p5.text('Planet Uranus', 35, -2)
         p5.pop()
 
+
+
+
+
 player1 = Player(int(p5.random(255)),75)
 print(player1.x)
 
 player2 = Player(150, 250)
 print(player2.x)
+
+
 
 def setup():
     p5.createCanvas(300, 300)  
@@ -57,6 +64,7 @@ def draw():
     global years
     global x, y
     p5.fill(255)
+
 
     p5.background(0) 
     p5.textSize(18)
@@ -85,6 +93,8 @@ def draw():
         player2.x = p5.width/2
 
 
+        
+
 def keyPressed(event):
     if(p5.keyCode == p5.RIGHT_ARROW):
         print('move point 10 pixels to the right..')
@@ -92,3 +102,79 @@ def keyPressed(event):
     if(p5.keyCode == p5.LEFT_ARROW):
         print('move point 10 pixels to the right..')
         player2.move_point(25, 0)  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
