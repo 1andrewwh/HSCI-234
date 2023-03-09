@@ -3,6 +3,8 @@ p5 = js.window
 
 years= 0 
 
+#Use left and right arrows to move Planet Uranus
+
 class Player:  
 
     x = 0  
@@ -102,79 +104,3 @@ def keyPressed(event):
     if(p5.keyCode == p5.LEFT_ARROW):
         print('move point 10 pixels to the right..')
         player2.move_point(25, 0)  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-        
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
