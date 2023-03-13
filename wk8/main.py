@@ -96,6 +96,14 @@ def draw():
 
 
         
+def keyReleased(event):
+    pass
+
+def mousePressed(event):
+    pass
+
+def mouseReleased(event):
+    pass
 
 def keyPressed(event):
     if(p5.keyCode == p5.RIGHT_ARROW):
