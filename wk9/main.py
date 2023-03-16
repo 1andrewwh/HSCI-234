@@ -1,6 +1,8 @@
 import js
 p5 = js.window
 
+#PREVIEW: Click to Show characters: in-game set (state2)
+
 state = 'state1'
 bg = p5.loadImage('targettack-bg-img.jpg')
 lightgreen = p5.color('#EDF2D0')
@@ -82,13 +84,6 @@ def StartSniper():
     p5.text("Long Range", 95, 87)
     p5.image(start_button, 187, 119, 18, 18)
 
-# def Button():
-#     global lightgreen
-#     global darkgreen
-#     p5.strokeWeight(1)
-#     p5.stroke(lightgreen)
-#     p5.fill(darkgreen)
-#     p5.rect(100,164,101,23,3)
 
 
 def Button():
