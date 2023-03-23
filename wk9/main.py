@@ -11,12 +11,57 @@ sniper_runes = p5.loadImage('sniper-runes.png')
 start_button = p5.loadImage('Targettack-start.jpg')
 tank_img = p5.loadImage('Tankman.png')
 mercenary_img = p5.loadImage('Mercenary.png')
+img_sniper_bullet = p5.loadImage('sniperbullet.png')
+img_tank_bullet = p5.loadImage('tank_bullet.png')
+img_mercenary_bullet = p5.loadImage('mercenary_bullet.png')
 
 circle_x = 150
 circle_y = 150
 circle_xspeed = 2
 circle_yspeed = 1
 circle_radius = 25
+
+class SniperBullet:
+    def __init__(self, x = 150, y = 250):
+        self.x = x
+        self.y = y
+
+    def draw(self):
+        p5.push()
+        p5.translate(self.x, self.y)
+        p5.image(img_sniper_bullet, 0,0, 4,10)
+        p5.pop()
+
+    def update(self):
+        self.y -=4
+
+class TankBullet:
+    def __init__(self, x = 150, y = 250):
+        self.x = x
+        self.y = y
+
+    def draw(self):
+        p5.push()
+        p5.translate(self.x, self.y)
+        p5.image(img_tank_bullet, 0,0, 8,15)
+        p5.pop()
+
+    def update(self):
+        self.y -=2
+
+class MercenaryBullet:
+    def __init__(self, x = 150, y = 250):
+        self.x = x
+        self.y = y
+
+    def draw(self):
+        p5.push()
+        p5.translate(self.x, self.y)
+        p5.image(img_mercenary_bullet, 0,0, 6,6)
+        p5.pop()
+
+    def update(self):
+        self.y -=5
 
 class Sniper:  
 
@@ -106,10 +151,13 @@ class Mercenary:
 mercenary = Mercenary(x = 150, y = 133, speed = 1)
 tank = TankMan(x = 150, y = 133, speed = 1)
 sniper = Sniper(x = 204, y = 133, speed = 2)
+sniper_bullet = SniperBullet(150, 0)
+tank_bullet = TankBullet(150,0)
+mercenary_bullet = MercenaryBullet(150,0)
 
 def setup():
     p5.createCanvas(300, 300)  
-    global sniper
+    global sniper, state
     sniper.x = 138
     sniper.y = 95
     tank.x = 138
@@ -135,13 +183,87 @@ def draw():
         Button1()
         Button2()
         Button3()
-    if(state == 'Play'):
+
+    if(state == 'PlaySniper'):
         p5.background(bg)
         sniper.draw()
         sniper.move()
         Target()
         Aim()
+        sniper_bullet.update()
+        sniper_bullet.draw()
+        d = p5.dist(circle_x, circle_y, sniper_bullet.x, sniper_bullet.y)
+        if(d < 26):  
+            state = 'Victory'
+        char_d = p5.dist(circle_x, circle_y, sniper.x, sniper.y)
+        if(char_d < 26):
+            state = "Defeat"
+    if(state =='Victory'):
+        p5.background(255)
+        p5.fill(0)
+        p5.stroke(0)
+        p5.textSize(24)
+        p5.text("Victory!", 150, 150)
+    if(state =='Defeat'):
+        p5.background(0)
+        p5.fill(255)
+        p5.stroke(255)
+        p5.textSize(24)
+        p5.text("Defeat", 150, 150)
 
+    if(state == 'PlayTank'):
+        p5.background(bg)
+        tank.draw()
+        tank.move()
+        Target()
+        Aim()
+        tank_bullet.update()
+        tank_bullet.draw()
+        d = p5.dist(circle_x, circle_y, tank_bullet.x, tank_bullet.y)
+        if(d < 26):  
+            state = 'Victory'
+        char_d = p5.dist(circle_x, circle_y, tank.x, tank.y)
+        if(char_d < 26):
+            state = "Defeat"
+    if(state =='Victory'):
+        p5.background(255)
+        p5.fill(0)
+        p5.stroke(0)
+        p5.textSize(24)
+        p5.text("Victory!", 150, 150)
+    if(state =='Defeat'):
+        p5.background(0)
+        p5.fill(255)
+        p5.stroke(255)
+        p5.textSize(24)
+        p5.text("Defeat", 150, 150)
+
+    if(state == 'PlayMercenary'):
+        p5.background(bg)
+        mercenary.draw()
+        mercenary.move()
+        Target()
+        Aim()
+        mercenary_bullet.update()
+        mercenary_bullet.draw()
+        d = p5.dist(circle_x, circle_y, mercenary_bullet.x, mercenary_bullet.y)
+        if(d < 26):  
+            state = 'Victory'
+        char_d = p5.dist(circle_x, circle_y, mercenary.x, mercenary.y)
+        if(char_d < 26):
+            state = "Defeat"
+    if(state =='Victory'):
+        p5.background(255)
+        p5.fill(0)
+        p5.stroke(0)
+        p5.textSize(24)
+        p5.text("Victory!", 150, 150)
+    if(state =='Defeat'):
+        p5.background(0)
+        p5.fill(255)
+        p5.stroke(255)
+        p5.textSize(24)
+        p5.text("Defeat", 150, 150)
 
 
 
@@ -223,6 +345,7 @@ def Button1():
             p5.text('Sniper', 138, 178)
             StartSniper()
 
+
     
 
 def Button2():
@@ -272,38 +395,6 @@ def Button3():
         p5.text('Mercenary', 130, 237)
         StartMercenary()
     
-
-
-
-
-def keyReleased(event):
-    pass
-
-
-def mousePressed(event):
-    global state
-    state = 'state2'
-
-
-def mouseReleased(event):
-    global state
-    if(state == 'Start'):
-        state = 'Reset'
-    elif(state == 'Play'):
-        state = 'Pause'
-    else:
-        state = 'Play'
-
-
-def keyPressed(event):
-    global state
-    if(p5.key == '1'):
-        state = 'state1'
-    elif(p5.key == '2'):
-        state = 'state2'
-    elif(p5.key == '3'):
-        state = 'state3'
-
 def Target():   
     global circle_x, circle_xspeed
     global circle_y, circle_yspeed
@@ -326,6 +417,47 @@ def Aim():
     p5.line(p5.mouseX,p5.mouseY-25,p5.mouseX, p5.mouseY+25)
     p5.line(p5.mouseX-25, p5.mouseY,p5.mouseX+25, p5.mouseY)
     p5.noFill()
+
+
+
+def keyReleased(event):
+    pass
+
+
+def mousePressed(event):
+    global sniper_bullet
+    if(state == 'PlaySniper'):
+        if(p5.mousePressed):
+            sniper_bullet.x = sniper.x
+            sniper_bullet.y = sniper.y
+    if(state == 'PlayTank'):
+        if(p5.mousePressed):
+            tank_bullet.x = tank.x
+            tank_bullet.y = tank.y
+    if(state == 'PlayMercenary'):
+        if(p5.mousePressed):
+            mercenary_bullet.x = mercenary.x
+            mercenary_bullet.y = mercenary.y
+
+
+def mouseReleased(event):
+    global state
+    if(state == 'Start'):
+        state = 'Reset'
+    else:
+        state = 'PlaySniper'
+
+
+def keyPressed(event):
+    global state
+    if(p5.key == '1'):
+        state = 'PlaySniper'
+    elif(p5.key == '2'):
+        state = 'PlayTank'
+    elif(p5.key == '3'):
+        state = 'PlayMercenary'
+
+
 
 
 
