@@ -440,12 +440,38 @@ def mousePressed(event):
             mercenary_bullet.y = mercenary.y
 
 
+
 def mouseReleased(event):
+    button1_x = 100
+    button1_y = 164
+    button1_w = 101
+    button1_h = 23
+    button2_x = 100
+    button2_y = 194
+    button2_w = 101
+    button2_h = 23
+    button3_x = 100
+    button3_y = 223
+    button3_w = 101
+    button3_h = 23
     global state
     if(state == 'Start'):
-        state = 'Reset'
-    else:
-        state = 'PlaySniper'
+    #    state = 'Reset'
+    #else:
+    #    state = 'PlaySniper'
+        if(p5.mouseX > button1_x) and (p5.mouseX < button1_x + button1_w) \
+        and (p5.mouseY > button1_y) and (p5.mouseY < button1_y + button1_h):
+            state = 'PlaySniper'
+        if(p5.mouseX > button2_x) and (p5.mouseX < button2_x + button2_w) \
+        and (p5.mouseY > button2_y) and (p5.mouseY < button2_y + button2_h) \
+        and (p5.mousePressed):
+            state = 'PlayTank'
+        if(p5.mouseX > button3_x) and (p5.mouseX < button3_x + button3_w) \
+        and (p5.mouseY > button3_y) and (p5.mouseY < button3_y + button3_h) \
+        and (p5.mousePressed):
+            state = 'PlayMercenary'
+    print('change state to ' + state)
+
 
 
 def keyPressed(event):
