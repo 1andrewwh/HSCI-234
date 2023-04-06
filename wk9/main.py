@@ -166,6 +166,8 @@ class Sniper:
                     self.y += 2.25
 class SniperBullet:
     angle = 0
+    speed = 2
+    is_fired = False
 
     def __init__(self, x = 150, y = 250, w = 4, h = 10):
         self.x = x
@@ -181,7 +183,10 @@ class SniperBullet:
         p5.pop()
 
     def update(self):
-        self.y -=4
+        if(self.is_fired == True):
+            # self.y -=4
+            self.x += p5.cos(self.angle) * self.speed
+            self.y += p5.sin(self.angle) * self.speed
 
         # dx = p5.mouseX - self.x
         # dy = p5.mouseY - self.y
@@ -666,9 +671,10 @@ def keyReleased(event):
 def mousePressed(event):
     global sniper_bullet
     if(state == 'PlaySniper'):
-        if(p5.mousePressed):
-            sniper_bullet.x = sniper.x
-            sniper_bullet.y = sniper.y
+        sniper_bullet.x = sniper.x
+        sniper_bullet.y = sniper.y
+        sniper_bullet.angle = sniper.angle
+        sniper_bullet.is_fired = True
     if(state == 'PlayTank'):
         if(p5.mousePressed):
             tank_bullet.x = tank.x
