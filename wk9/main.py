@@ -131,12 +131,48 @@ y = p5.random(50,250)
 #     target_list[i].draw()
 #     target_list[i].move()
 
+
+class Sniper:  
+
+    x = 0  
+    y = 0  
+    angle = 0
+
+    def __init__(self, x = 0, y = 0, speed = 0):
+        self.x = x
+        self.y = y
+        self.speed = speed
+
+    def draw(self):
+        p5.push()
+        p5.translate(self.x, self.y)
+        p5.rotate(self.angle + 20.38)
+        p5.image(sniper_img, -15, -25, 23, 39)
+        p5.pop()
+
+    def move(self):
+        if(p5.keyIsPressed == True):
+            if(p5.key == 'a'):
+                if(self.x > 30):
+                    self.x -= 2.25
+            if(p5.key == 'd'):
+                if(self.x < p5.width - 60):
+                    self.x +=2.25
+            if(p5.key == 'w'):
+                if(self.y > 60):
+                    self.y -= 2.25
+            if(p5.key == 's'):
+                if(self.y < p5.height - 80):
+                    self.y += 2.25
 class SniperBullet:
+    angle = 0
+
     def __init__(self, x = 150, y = 250, w = 4, h = 10):
         self.x = x
         self.y = y
         self.w = w
         self.h = h
+        
 
     def draw(self):
         p5.push()
@@ -146,6 +182,49 @@ class SniperBullet:
 
     def update(self):
         self.y -=4
+
+        # dx = p5.mouseX - self.x
+        # dy = p5.mouseY - self.y
+        # distance = sqrt(dx*dx + dy*dy)
+
+        # if(distance > 5):
+        #     self.x += dx/distance * 5
+        #     self.y += dy/distance * 5
+
+class TankMan:  
+
+    x = 0  
+    y = 0  
+    angle = 0
+
+    def __init__(self, x = 0, y = 0, speed = 1):
+        self.x = x
+        self.y = y
+        self.speed = speed
+
+    def draw(self):
+        p5.push()
+        p5.translate(self.x, self.y)
+        p5.rotate(self.angle + 20.38)
+        p5.image(tank_img, -13, -22, 27, 29)
+        p5.pop()
+
+
+    def move(self):
+        if(p5.keyIsPressed == True):
+            if(p5.key == 'a'):
+                if(self.x > 30):
+                    self.x -= 1.5
+            if(p5.key == 'd'):
+                if(self.x < p5.width - 60):
+                    self.x += 1.5
+            if(p5.key == 'w'):
+                if(self.y > 60):
+                    self.y -= 1.5
+            if(p5.key == 's'):
+                if(self.y < p5.height - 80):
+                    self.y += 1.5
+
 
 class TankBullet:
     def __init__(self, x = 150, y = 250, w = 10, h = 18):
@@ -163,87 +242,12 @@ class TankBullet:
     def update(self):
         self.y -=3
 
-class MercenaryBullet:
-    def __init__(self, x = 150, y = 250 , w = 6, h = 6):
-        self.x = x
-        self.y = y
-        self.w = w
-        self.h = h
-
-    def draw(self):
-        p5.push()
-        p5.translate(self.x, self.y)
-        p5.image(img_mercenary_bullet, 0,0, self.w, self.h)
-        p5.pop()
-
-    def update(self):
-        self.y -=5
-
-class Sniper:  
-
-    x = 0  
-    y = 0  
-
-    def __init__(self, x = 0, y = 0, speed = 0):
-        self.x = x
-        self.y = y
-        self.speed = speed
-
-    def draw(self):
-        p5.image(sniper_img, self.x, self.y, 23, 39)
-
-    def move(self):
-        if(p5.keyIsPressed == True):
-            if(p5.key == 'a'):
-                if(self.x > 30):
-                    self.x -= 2.25
-            if(p5.key == 'd'):
-                if(self.x < p5.width - 60):
-                    self.x +=2.25
-            if(p5.key == 'w'):
-                if(self.y > 60):
-                    self.y -= 2.25
-            if(p5.key == 's'):
-                if(self.y < p5.height - 80):
-                    self.y += 2.25
-
-class TankMan:  
-
-    x = 0  
-    y = 0  
-
-    def __init__(self, x = 0, y = 0, speed = 1):
-        self.x = x
-        self.y = y
-        self.speed = speed
-
-    def draw(self):
-        p5.image(tank_img, self.x, self.y, 27, 29)
-
-
-    def rotate(self):
-        p5.rotate(p5.PI/p5.mouseX)
-
-
-    def move(self):
-        if(p5.keyIsPressed == True):
-            if(p5.key == 'a'):
-                if(self.x > 30):
-                    self.x -= 1.25
-            if(p5.key == 'd'):
-                if(self.x < p5.width - 60):
-                    self.x += 1.25
-            if(p5.key == 'w'):
-                if(self.y > 60):
-                    self.y -= 1.25
-            if(p5.key == 's'):
-                if(self.y < p5.height - 80):
-                    self.y += 1.25
 
 class Mercenary:  
 
     x = 0  
     y = 0
+    angle = 0
 
     def __init__(self, x = 0, y = 0, speed = 1):
         self.x = x
@@ -251,7 +255,11 @@ class Mercenary:
         self.speed = speed
 
     def draw(self):
-        p5.image(mercenary_img, self.x, self.y, 19, 30)
+        p5.push()
+        p5.translate(self.x, self.y)
+        p5.rotate(self.angle + 20.38)
+        p5.image(mercenary_img, -10, -22, 19, 30)
+        p5.pop()
 
     def move(self):
         if(p5.keyIsPressed == True):
@@ -269,6 +277,23 @@ class Mercenary:
                     self.y += 3
 
 
+class MercenaryBullet:
+    def __init__(self, x = 150, y = 250 , w = 6, h = 6):
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+
+    def draw(self):
+        p5.push()
+        p5.translate(self.x, self.y)
+        p5.image(img_mercenary_bullet, 0,0, self.w, self.h)
+        p5.pop()
+
+    def update(self):
+        self.y -=5
+
+
 button1 = Button(x = 100, y = 164, w = 101, h = 23, text=character[0], text_x = 138, text_y = 178)
 button2 = Button(x = 100, y = 194, w = 101, h = 23, text = character[1], text_x = 141, text_y = 209)
 button3 = Button(x = 100, y = 223, w = 101, h = 23, text = character[2], text_x = 130, text_y = 237)
@@ -278,9 +303,9 @@ startmercenary = Start(x = 85, y = 64, w = 130, h = 82, text=character[2], text_
 easytarget = Target(x=30,y=30, speedx = 2, speedy = 1, r = 25, color = 180, lives = 1)
 mediumtarget = Target(x=30,y=100, speedx = 2.3, speedy = 1.2, r = 20, color = 100, lives = 2)
 hardtarget = Target(x=190,y=90, speedx = 3, speedy = 2, r = 15, color = 20, lives = 3)
-mercenary = Mercenary(x = 150, y = 133, speed = 1)
-tank = TankMan(x = 150, y = 133, speed = 1)
-sniper = Sniper(x = 204, y = 133, speed = 2)
+mercenary = Mercenary(x = 150, y = 150, speed = 1)
+tank = TankMan(x = 150, y = 150, speed = 1)
+sniper = Sniper(x = 150, y = 150, speed = 2)
 sniper_bullet = SniperBullet(150, 0)
 tank_bullet = TankBullet(150,0)
 mercenary_bullet = MercenaryBullet(150,0)
@@ -288,12 +313,8 @@ mercenary_bullet = MercenaryBullet(150,0)
 def setup():
     p5.createCanvas(300, 300)  
     global sniper, state
-    sniper.x = 150
-    sniper.y = 150
-    tank.x = 134
-    tank.y = 105
-    mercenary.x = 140
-    mercenary.y = 102
+    mercenary.x = 150
+    mercenary.y = 150
 
 
 def draw():
@@ -317,12 +338,15 @@ def draw():
         button1.draw()
         button2.draw()
         button3.draw()
-        sniper.x = 138
-        sniper.y = 95
-        tank.x = 134
-        tank.y = 105
-        mercenary.x = 140
-        mercenary.y = 102
+        sniper.x = 152
+        sniper.y = 118
+        sniper.angle = 11.05
+        tank.x = 150
+        tank.y = 128
+        tank.angle = 11.05
+        mercenary.x = 149
+        mercenary.y = 126
+        mercenary.angle = 11.05
 
     if(state == 'PlaySniper'):
         target_list = []
@@ -330,6 +354,9 @@ def draw():
         p5.background(bg)
         easytarget.draw()
         easytarget.move()
+        dx = p5.mouseX - sniper.x
+        dy = p5.mouseY - sniper.y
+        sniper.angle = p5.atan2(dy, dx) 
         sniper.draw()
         sniper.move()
         p5.fill(240, 230, 210)
@@ -354,6 +381,9 @@ def draw():
         p5.noStroke()
         p5.background(bg)
         p5.fill(0, 160)
+        dx = p5.mouseX - sniper.x
+        dy = p5.mouseY - sniper.y
+        sniper.angle = p5.atan2(dy, dx) 
         sniper.draw()
         sniper.move()
         target_list[0].draw()
@@ -381,6 +411,9 @@ def draw():
         p5.noStroke()
         p5.background(bg)
         p5.fill(0, 160)
+        dx = p5.mouseX - sniper.x
+        dy = p5.mouseY - sniper.y
+        sniper.angle = p5.atan2(dy, dx) 
         sniper.draw()
         sniper.move()
         target_list[0].draw()
@@ -404,11 +437,14 @@ def draw():
 
     if(state == 'PlayTank'):
         p5.background(bg)
-        tank.draw()
-        tank.move()
         easytarget.draw()
         easytarget.move()
-        # Aim()
+        dx = p5.mouseX - tank.x
+        dy = p5.mouseY - tank.y
+        tank.angle = p5.atan2(dy, dx) 
+        tank.draw()
+        tank.move()
+        Aim()
         tank_bullet.update()
         tank_bullet.draw()
         p5.fill(240, 230, 210)
@@ -431,6 +467,9 @@ def draw():
         p5.noStroke()
         p5.background(bg)
         p5.fill(0, 160)
+        dx = p5.mouseX - tank.x
+        dy = p5.mouseY - tank.y
+        tank.angle = p5.atan2(dy, dx) 
         tank.draw()
         tank.move()
         target_list[0].draw()
@@ -458,6 +497,9 @@ def draw():
         p5.noStroke()
         p5.background(bg)
         p5.fill(0, 160)
+        dx = p5.mouseX - tank.x
+        dy = p5.mouseY - tank.y
+        tank.angle = p5.atan2(dy, dx) 
         tank.draw()
         tank.move()
         target_list[0].draw()
@@ -481,6 +523,9 @@ def draw():
 
     if(state == 'PlayMercenary'):
         p5.background(bg)
+        dx = p5.mouseX - mercenary.x
+        dy = p5.mouseY - mercenary.y
+        mercenary.angle = p5.atan2(dy, dx) 
         mercenary.draw()
         mercenary.move()
         easytarget.draw()
@@ -508,6 +553,9 @@ def draw():
         p5.noStroke()
         p5.background(bg)
         p5.fill(0, 160)
+        dx = p5.mouseX - mercenary.x
+        dy = p5.mouseY - mercenary.y
+        mercenary.angle = p5.atan2(dy, dx) 
         mercenary.draw()
         mercenary.move()
         target_list[0].draw()
@@ -535,6 +583,9 @@ def draw():
         p5.noStroke()
         p5.background(bg)
         p5.fill(0, 160)
+        dx = p5.mouseX - mercenary.x
+        dy = p5.mouseY - mercenary.y
+        mercenary.angle = p5.atan2(dy, dx) 
         mercenary.draw()
         mercenary.move()
         target_list[0].draw()
