@@ -166,6 +166,8 @@ class Sniper:
                     self.y += 2.25
 class SniperBullet:
     angle = 0
+    speed = 2
+    is_fired = False
 
     def __init__(self, x = 150, y = 250, w = 4, h = 10):
         self.x = x
@@ -181,7 +183,9 @@ class SniperBullet:
         p5.pop()
 
     def update(self):
-        self.y -=4
+        if(self.is_fired == True):
+            self.x += p5.cos(self.angle) * self.speed
+            self.y += p5.sin(self.angle) * self.speed
 
         # dx = p5.mouseX - self.x
         # dy = p5.mouseY - self.y
@@ -227,11 +231,16 @@ class TankMan:
 
 
 class TankBullet:
+    angle = 0
+    speed = 2
+    is_fired = False
+
     def __init__(self, x = 150, y = 250, w = 10, h = 18):
         self.x = x
         self.y = y
         self.w = w
         self.h = h
+
 
     def draw(self):
         p5.push()
@@ -240,7 +249,11 @@ class TankBullet:
         p5.pop()
 
     def update(self):
-        self.y -=3
+        if(self.is_fired == True):
+            self.x += p5.cos(self.angle) * self.speed
+            self.y += p5.sin(self.angle) * self.speed
+
+
 
 
 class Mercenary:  
@@ -278,6 +291,10 @@ class Mercenary:
 
 
 class MercenaryBullet:
+    angle = 0
+    speed = 2
+    is_fired = False
+
     def __init__(self, x = 150, y = 250 , w = 6, h = 6):
         self.x = x
         self.y = y
@@ -291,7 +308,10 @@ class MercenaryBullet:
         p5.pop()
 
     def update(self):
-        self.y -=5
+        if(self.is_fired == True):
+            self.x += p5.cos(self.angle) * self.speed
+            self.y += p5.sin(self.angle) * self.speed
+            self.angle = self.angle
 
 
 button1 = Button(x = 100, y = 164, w = 101, h = 23, text=character[0], text_x = 138, text_y = 178)
@@ -666,41 +686,51 @@ def keyReleased(event):
 def mousePressed(event):
     global sniper_bullet
     if(state == 'PlaySniper'):
-        if(p5.mousePressed):
-            sniper_bullet.x = sniper.x
-            sniper_bullet.y = sniper.y
-    if(state == 'PlayTank'):
-        if(p5.mousePressed):
-            tank_bullet.x = tank.x
-            tank_bullet.y = tank.y
-    if(state == 'PlayMercenary'):
-        if(p5.mousePressed):
-            mercenary_bullet.x = mercenary.x
-            mercenary_bullet.y = mercenary.y
+        sniper_bullet.x = sniper.x
+        sniper_bullet.y = sniper.y
+        sniper_bullet.angle = sniper.angle
+        sniper_bullet.is_fired = True
     if(state == 'sniperlevel2'):
-        if(p5.mousePressed):
-            sniper_bullet.x = sniper.x
-            sniper_bullet.y = sniper.y
+        sniper_bullet.x = sniper.x
+        sniper_bullet.y = sniper.y
+        sniper_bullet.angle = sniper.angle
+        sniper_bullet.is_fired = True
     if(state == 'sniperlevel3'):
-        if(p5.mousePressed):
-            sniper_bullet.x = sniper.x
-            sniper_bullet.y = sniper.y
+        sniper_bullet.x = sniper.x
+        sniper_bullet.y = sniper.y
+        sniper_bullet.angle = sniper.angle
+        sniper_bullet.is_fired = True
+    if(state == 'PlayTank'):
+        tank_bullet.x = tank.x
+        tank_bullet.y = tank.y
+        tank_bullet.angle = tank.angle
+        tank_bullet.is_fired = True
     if(state == 'tanklevel2'):
-        if(p5.mousePressed):
-            tank_bullet.x = tank.x
-            tank_bullet.y = tank.y
+        tank_bullet.x = tank.x
+        tank_bullet.y = tank.y
+        tank_bullet.angle = tank.angle
+        tank_bullet.is_fired = True
     if(state == 'tanklevel3'):
-        if(p5.mousePressed):
-            tank_bullet.x = tank.x
-            tank_bullet.y = tank.y
+        tank_bullet.x = tank.x
+        tank_bullet.y = tank.y
+        tank_bullet.angle = tank.angle
+        tank_bullet.is_fired = True
+    if(state == 'PlayMercenary'):
+        mercenary_bullet.x = mercenary.x
+        mercenary_bullet.y = mercenary.y
+        mercenary_bullet.angle = mercenary.angle
+        mercenary_bullet.is_fired = True
     if(state == 'mercenarylevel2'):
-        if(p5.mousePressed):
-            mercenary_bullet.x = mercenary.x
-            mercenary_bullet.y = mercenary.y
+        mercenary_bullet.x = mercenary.x
+        mercenary_bullet.y = mercenary.y
+        mercenary_bullet.angle = mercenary.angle
+        mercenary_bullet.is_fired = True
     if(state == 'mercenarylevel3'):
-        if(p5.mousePressed):
-            mercenary_bullet.x = mercenary.x
-            mercenary_bullet.y = mercenary.y
+        mercenary_bullet.x = mercenary.x
+        mercenary_bullet.y = mercenary.y
+        mercenary_bullet.angle = mercenary.angle
+        mercenary_bullet.is_fired = True
+
 
 def mouseReleased(event):
     button1_x = 100
