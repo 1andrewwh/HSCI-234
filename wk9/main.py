@@ -166,7 +166,7 @@ class Sniper:
                     self.y += 2.25
 class SniperBullet:
     angle = 0
-    speed = 2
+    speed = 4
     is_fired = False
 
     def __init__(self, x = 150, y = 250, w = 4, h = 10):
@@ -179,6 +179,7 @@ class SniperBullet:
     def draw(self):
         p5.push()
         p5.translate(self.x, self.y)
+        p5.rotate(self.angle + p5.radians(90))
         p5.image(img_sniper_bullet, 0,0, self.w, self.h)
         p5.pop()
 
@@ -186,6 +187,7 @@ class SniperBullet:
         if(self.is_fired == True):
             self.x += p5.cos(self.angle) * self.speed
             self.y += p5.sin(self.angle) * self.speed
+            self.angle = self.angle
 
         # dx = p5.mouseX - self.x
         # dy = p5.mouseY - self.y
@@ -232,7 +234,7 @@ class TankMan:
 
 class TankBullet:
     angle = 0
-    speed = 2
+    speed = 3
     is_fired = False
 
     def __init__(self, x = 150, y = 250, w = 10, h = 18):
@@ -245,6 +247,7 @@ class TankBullet:
     def draw(self):
         p5.push()
         p5.translate(self.x, self.y)
+        p5.rotate(self.angle + p5.radians(90))
         p5.image(img_tank_bullet, 0,0, self.w, self.h)
         p5.pop()
 
@@ -292,7 +295,7 @@ class Mercenary:
 
 class MercenaryBullet:
     angle = 0
-    speed = 2
+    speed = 4.5
     is_fired = False
 
     def __init__(self, x = 150, y = 250 , w = 6, h = 6):
@@ -304,6 +307,7 @@ class MercenaryBullet:
     def draw(self):
         p5.push()
         p5.translate(self.x, self.y)
+        p5.rotate(self.angle + p5.radians(90))
         p5.image(img_mercenary_bullet, 0,0, self.w, self.h)
         p5.pop()
 
@@ -311,7 +315,7 @@ class MercenaryBullet:
         if(self.is_fired == True):
             self.x += p5.cos(self.angle) * self.speed
             self.y += p5.sin(self.angle) * self.speed
-            self.angle = self.angle
+            
 
 
 button1 = Button(x = 100, y = 164, w = 101, h = 23, text=character[0], text_x = 138, text_y = 178)
