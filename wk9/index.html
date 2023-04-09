@@ -11,6 +11,15 @@
       }
     </script>
     <style>
+      p {
+        position: absolute;
+        top: 350px;
+        left: 10px;
+        width: 300px;
+        font-size: 12px;
+        /* font-family: 'Courier New', Courier, monospace; */ 
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      }
       body {
         background-color: #efefef;
         /*background-color: #aaaaaa;*/
@@ -50,7 +59,7 @@
       py-terminal {
         position: absolute;
         left: 0px;
-        top: calc(100% - 215px);
+        top: 700px;
         width: calc(100%);
         height: 215px;
         overflow-y: auto;
@@ -154,6 +163,7 @@
       }
       client.send();
     </script>
+    <p id="instructions">Targettack is a 2D Shooting Game created and design by Andrew Huang under the guidance of his instructor, Nikita. The game consists of three characters; Sniper, Tank, Mercenary, with each having unique characteristics. Using the keys, W, A, S, D, the characters can move around the map. By clicking the mouse button, characters will shoot a bullet. Players can move around the mouse to aim where their bullets are going to shoot. The speed and size of the bullet varies based on the character choice. The goal of Targettack is to complete all three levels by shooting down all the targets. As each level progresses, the targets get smaller and faster, to make it more challenging to win the whole game.</p>
 
     <div class="refresh-btn">
       <button id="reload-sketch" py-click="reload_sketch()">Refresh Canvas</button>
