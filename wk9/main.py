@@ -41,6 +41,7 @@ class Button:
         p5.rect(self.x,self.y,self.w,self.h,3)
         p5.fill(lightgreen)
         p5.textSize(9)
+        p5.noStroke()
         p5.text(self.text, self.text_x, self.text_y)
         if(p5.mouseX > self.x) and (p5.mouseX < self.x + self.w) \
         and (p5.mouseY > self.y) and (p5.mouseY < self.y + self.h):
